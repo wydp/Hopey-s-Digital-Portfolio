@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khryzzel Hope Padilla | Midwifery Student</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Extend Tailwind with custom design tokens
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sage: {
+                50:  "#f4f7f4",
+                100: "#e6ede6",
+                200: "#ccdccc",
+                300: "#a4c0a4",
+                400: "#729e72",
+                500: "#507d50",
+                600: "#3d633d",
+                700: "#324f32",
+                800: "#29402a",
+                900: "#223523",
+              },
+              blush: "#f5ede8",
+              warm:  "#faf8f5",
+            },
+            fontFamily: {
+              display: ["Cormorant Garamond", "Georgia", "serif"],
+              body:    ["DM Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Base font applied globally */
+      body {
+        font-family: "DM Sans", sans-serif;
+        background-color: #faf8f5;
+        color: #2a2a2a;
+      }
+
+      /* Display font utility */
+      .font-display {
+        font-family: "Cormorant Garamond", Georgia, serif;
+      }
+
+      /* Smooth scroll for anchor navigation */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Fade-in animation for sections */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Decorative underline for section headings */
+      .section-heading::after {
+        content: "";
+        display: block;
+        width: 48px;
+        height: 2px;
+        background-color: #507d50;
+        margin-top: 10px;
+      }
+
+      /* Nav link hover underline effect */
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background-color: #507d50;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Mobile menu transition */
+      #mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      #mobile-menu.open {
+        max-height: 400px;
+      }
+
+      /* Hero background gradient */
+      .hero-bg {
+        background: linear-gradient(135deg, #f4f7f4 0%, #faf8f5 50%, #f5ede8 100%);
+      }
+
+      /* Card hover lift */
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(80, 125, 80, 0.12);
+      }
+
+      /* Skill badge */
+      .skill-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      /* Competency level dot */
+      .level-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body class="antialiased">
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm/90 backdrop-blur-sm border-b border-sage-100">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Logo / Name -->
+        <a href="#hero" class="font-display text-xl text-sage-700 tracking-wide">
+          Khryzzel Hope
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="hidden md:flex items-center gap-8 text-sm text-gray-600 font-body">
+          <li><a href="#about"      class="nav-link hover:text-sage-600 transition-colors">About</a></li>
+          <li><a href="#philosophy" class="nav-link hover:text-sage-600 transition-colors">Philosophy</a></li>
+          <li><a href="#experience" class="nav-link hover:text-sage-600 transition-colors">Experience</a></li>
+          <li><a href="#projects"   class="nav-link hover:text-sage-600 transition-colors">Projects</a></li>
+          <li><a href="#skills"     class="nav-link hover:text-sage-600 transition-colors">Skills</a></li>
+          <li>
+            <a href="#contact"
+               class="px-4 py-2 bg-sage-500 text-white rounded-full text-sm hover:bg-sage-600 transition-colors">
+              Contact
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+          <span class="block w-5 h-0.5 bg-sage-700 transition-all duration-300" id="bar1"></span>
+          <span class="block w-5 h-0.5 bg-sage-700 transition-all duration-300" id="bar2"></span>
+          <span class="block w-5 h-0.5 bg-sage-700 transition-all duration-300" id="bar3"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="md:hidden bg-warm border-t border-sage-100">
+        <ul class="flex flex-col px-6 py-4 gap-4 text-sm text-gray-600">
+          <li><a href="#about"      class="mobile-nav-link hover:text-sage-600">About</a></li>
+          <li><a href="#philosophy" class="mobile-nav-link hover:text-sage-600">Philosophy</a></li>
+          <li><a href="#experience" class="mobile-nav-link hover:text-sage-600">Experience</a></li>
+          <li><a href="#projects"   class="mobile-nav-link hover:text-sage-600">Projects</a></li>
+          <li><a href="#skills"     class="mobile-nav-link hover:text-sage-600">Skills</a></li>
+          <li><a href="#contact"    class="mobile-nav-link hover:text-sage-600">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="hero" class="hero-bg min-h-screen flex items-center pt-20">
+      <div class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+
+        <!-- Hero Text -->
+        <div class="fade-in">
+          <!-- Overline label -->
+          <p class="text-sage-500 text-sm font-medium tracking-widest uppercase mb-4">
+            Midwifery Student · Sultan Kudarat State University
+          </p>
+
+          <!-- Main heading -->
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-sage-800 leading-tight mb-6">
+            Khryzzel<br />
+            <span class="italic font-normal text-sage-500">Hope</span> Padilla
+          </h1>
+
+          <!-- Tagline -->
+          <p class="text-gray-500 text-base leading-relaxed max-w-md mb-10">
+            Committed to Woman-Centred Care · Aspiring Community Midwife
+            & Advocate for Maternal Health
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-4">
+            <a href="#experience"
+               class="px-6 py-3 bg-sage-500 text-white rounded-full text-sm font-medium hover:bg-sage-600 transition-colors">
+              View My Experience
+            </a>
+            <a href="#contact"
+               class="px-6 py-3 border border-sage-300 text-sage-700 rounded-full text-sm font-medium hover:bg-sage-50 transition-colors">
+              Get in Touch
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Visual / Photo Placeholder -->
+        <div class="fade-in flex justify-center md:justify-end" style="transition-delay: 0.2s;">
+          <div class="relative">
+            <!-- Decorative circle behind photo -->
+            <div class="absolute -inset-4 bg-sage-100 rounded-full opacity-60"></div>
+            <!-- Profile photo — replace src with actual photo path -->
+            <div class="relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl bg-sage-100 flex items-center justify-center">
+              <!-- Placeholder initials shown until real photo is added -->
+              <img
+                src="assets/images/profile.jpg"
+                alt="Khryzzel Hope Padilla"
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="hidden w-full h-full items-center justify-center font-display text-5xl text-sage-400">
+                KHP
+              </div>
+            </div>
+
+            <!-- Floating badge -->
+            <div class="absolute -bottom-2 -left-4 bg-white rounded-2xl shadow-lg px-4 py-2 border border-sage-100">
+              <p class="text-xs text-gray-400 font-medium">Expected Graduation</p>
+              <p class="text-sage-700 font-semibold text-sm">2028 · SKSU</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section id="about" class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-3 gap-16 items-start">
+
+          <!-- Section Label -->
+          <div class="fade-in">
+            <p class="text-sage-500 text-xs tracking-widest uppercase font-medium mb-3">01 / About</p>
+            <h2 class="font-display section-heading text-4xl text-sage-800">About Me</h2>
+
+            <!-- Quick Info Card -->
+            <div class="mt-10 space-y-4 text-sm text-gray-500">
+              <div class="flex items-start gap-3">
+                <!-- Location icon -->
+                <svg class="w-4 h-4 text-sage-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span>Tacurong City, Sultan Kudarat, Philippines</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <!-- Email icon -->
+                <svg class="w-4 h-4 text-sage-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <span>hopepadilla95@gmail.com</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <!-- Program icon -->
+                <svg class="w-4 h-4 text-sage-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                </svg>
+                <span>2nd Year · BS Midwifery</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bio Text -->
+          <div class="md:col-span-2 fade-in" style="transition-delay: 0.15s;">
+            <p class="text-gray-600 text-base leading-8 mb-6">
+              I chose midwifery because I believe every woman deserves safe, respectful, and empowering
+              care during one of life's most significant journeys. Growing up, I witnessed how quality
+              maternal health support can transform experiences and outcomes — and this inspired me to
+              pursue a career where I can make a tangible difference.
+            </p>
+            <p class="text-gray-600 text-base leading-8 mb-6">
+              My practice is guided by the belief that care should be holistic, inclusive, and rooted in
+              evidence-based practice — always prioritizing the dignity, choices, and safety of women and
+              their families. As a student at Sultan Kudarat State University, I have built a strong
+              foundation in clinical skills, health education, and community health principles.
+            </p>
+            <p class="text-gray-600 text-base leading-8">
+              My goal is to become a competent community midwife who can serve rural and underserved areas,
+              ensuring that maternal and newborn health services are accessible to all. I am dedicated to
+              continuous learning, collaboration, and advocating for policies and practices that improve
+              health outcomes for mothers and children everywhere.
+            </p>
+
+            <!-- Personal note -->
+            <div class="mt-8 p-5 bg-blush rounded-2xl border-l-4 border-sage-300">
+              <p class="text-sm text-gray-500 italic leading-relaxed">
+                Outside of midwifery, I enjoy traveling and exploring new cultures — though I love travel
+                but dislike flying! I am a fan of medical K-dramas and value time spent with family and
+                friends who keep me grounded and motivated.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== PHILOSOPHY & VALUES SECTION ========== -->
+    <section id="philosophy" class="py-24 bg-warm">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-16 fade-in">
+          <p class="text-sage-500 text-xs tracking-widest uppercase font-medium mb-3">02 / Philosophy</p>
+          <h2 class="font-display text-4xl text-sage-800 mb-4">Core Values & Philosophy</h2>
+          <p class="text-gray-400 text-sm max-w-md mx-auto">
+            The principles that guide every aspect of my practice and patient interactions.
+          </p>
+        </div>
+
+        <!-- Values Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Value 1 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Woman-Centred Care</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Placing the woman at the centre of every decision, honoring her choices, voice, and autonomy throughout her care journey.
+            </p>
+          </div>
+
+          <!-- Value 2 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100" style="transition-delay:0.1s">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Evidence-Based Practice</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Grounding all clinical decisions in current research and best practice guidelines to ensure the highest standard of care.
+            </p>
+          </div>
+
+          <!-- Value 3 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100" style="transition-delay:0.2s">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Compassion & Dignity</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Approaching every patient with genuine empathy, warmth, and an unwavering respect for their dignity and emotional wellbeing.
+            </p>
+          </div>
+
+          <!-- Value 4 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100" style="transition-delay:0.1s">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Cultural Safety</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Recognizing and respecting the unique cultural backgrounds, beliefs, and needs of every individual and community I serve.
+            </p>
+          </div>
+
+          <!-- Value 5 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100" style="transition-delay:0.2s">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Empowerment & Advocacy</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Empowering women to take an active role in their health and advocating for their rights within the healthcare system.
+            </p>
+          </div>
+
+          <!-- Value 6 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-7 border border-sage-100" style="transition-delay:0.3s">
+            <div class="w-10 h-10 bg-sage-50 rounded-xl flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-sage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-sage-800 mb-2">Quality & Safety</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Committed to delivering care that is safe, effective, and continuously improving through reflection and professional development.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== CLINICAL EXPERIENCE SECTION ========== -->
+    <section id="experience" class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="mb-16 fade-in">
+          <p class="text-sage-500 text-xs tracking-widest uppercase font-medium mb-3">03 / Experience</p>
+          <h2 class="font-display section-heading text-4xl text-sage-800">Clinical Placements</h2>
+        </div>
+
+        <div class="space-y-8">
+
+          <!-- Placement 1: SKPH -->
+          <div class="fade-in card-hover bg-warm rounded-2xl p-8 border border-sage-100">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+              <div>
+                <h3 class="font-display text-2xl text-sage-800 mb-1">Sultan Kudarat Provincial Hospital</h3>
+                <p class="text-sage-500 text-sm font-medium">Pediatric Ward & Obstetrics (OB) Ward</p>
+              </div>
+              <!-- Duration badge -->
+              <span class="px-4 py-1.5 bg-sage-100 text-sage-700 rounded-full text-xs font-medium shrink-0">
+                May 2026
+              </span>
+            </div>
+
+            <!-- Responsibilities -->
+            <div class="mb-6">
+              <p class="text-xs text-gray-400 uppercase tracking-widest font-medium mb-3">Key Responsibilities</p>
+              <ul class="grid sm:grid-cols-2 gap-2">
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Monitored vital signs of patients
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Performed IV flushing and maintenance
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Recorded and documented medical histories
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Applied and changed suture dressings
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Removed intravenous (IV) lines safely
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Assisted in IV insertions under supervision
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600 sm:col-span-2">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Provided health education on wound care and vital sign monitoring
+                </li>
+              </ul>
+            </div>
+
+            <!-- Reflection -->
+            <div class="p-4 bg-blush rounded-xl border-l-4 border-sage-300">
+              <p class="text-xs text-gray-400 uppercase tracking-widest font-medium mb-2">Key Learning</p>
+              <p class="text-sm text-gray-600 leading-relaxed italic">
+                "This experience taught me the importance of great patience — especially when caring for
+                children in the Paediatric Ward. A calm, understanding approach helps make healthcare
+                more comfortable and less stressful for both patients and families."
+              </p>
+            </div>
+          </div>
+
+          <!-- Placement 2: Tacurong City Health Office -->
+          <div class="fade-in card-hover bg-warm rounded-2xl p-8 border border-sage-100" style="transition-delay:0.15s">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+              <div>
+                <h3 class="font-display text-2xl text-sage-800 mb-1">Tacurong City Health Office</h3>
+                <p class="text-sage-500 text-sm font-medium">Community Health Placement</p>
+              </div>
+              <span class="px-4 py-1.5 bg-sage-100 text-sage-700 rounded-full text-xs font-medium shrink-0">
+                April 2026
+              </span>
+            </div>
+
+            <div class="mb-6">
+              <p class="text-xs text-gray-400 uppercase tracking-widest font-medium mb-3">Key Responsibilities</p>
+              <ul class="grid sm:grid-cols-2 gap-2">
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Assisted in circumcision procedures
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Supported community health service delivery
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-4 bg-sage-50 rounded-xl">
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Gained exposure to community-based primary health care operations and the role of local
+                health offices in delivering accessible services to the public.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== ACADEMIC PROJECTS SECTION ========== -->
+    <section id="projects" class="py-24 bg-warm">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="mb-16 fade-in">
+          <p class="text-sage-500 text-xs tracking-widest uppercase font-medium mb-3">04 / Projects</p>
+          <h2 class="font-display section-heading text-4xl text-sage-800">Academic Projects</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <!-- Project 1 -->
+          <div class="fade-in card-hover bg-white rounded-2xl p-8 border border-sage-100">
+            <!-- Type tag -->
+            <span class="inline-block px-3 py-1 bg-sage-100 text-sage-600 rounded-full text-xs font-medium mb-5">
+              Case Study
+            </span>
+            <h3 class="font-display text-2xl text-sage-800 mb-2">Case Study of Family H</h3>
+            <p class="text-gray-400 text-xs mb-5">December 2025</p>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+              A family-focused case study examining kidney stone disease and its relationship to lifestyle
+              factors including dietary habits, hydration levels, and daily routines. The study identified
+              key contributing factors and proposed targeted health education interventions.
+            </p>
+
+            <!-- Key Findings -->
+            <div class="mb-6">
+              <p class="text-xs text-gray-400 uppercase tracking-widest font-medium mb-3">Key Findings</p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Condition linked to lifestyle and dietary patterns
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Importance of hydration in prevention highlighted
+                </li>
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage-400 shrink-0"></span>
+                  Health education as a core intervention strategy
+                </li>
+              </ul>
+            </div>
+
+            <!-- Skills demonstrated -->
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-sage-50 text-sage-600 rounded-full text-xs">Critical Analysis</span>
+              <span class="px-3 py-1 bg-sage-50 text-sage-600 rounded-full text-xs">Evidence-Based Practice</span>
+              <span class="px-3 py-1 bg-sage-50 text-sage-600 rounded-full text-xs">Documentation</span>
+              <span class="px-3 py-1 bg-sage-50 text-sage-600 rounded-full text-xs">Data Collection</span>
+            </div>
+          </div>
+
+          <!-- Placeholder for future projects -->
+          <div class="fade-in border-2 border-dashed border-sage-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center" style="transition-delay:0.15s">
+            <div class="w-12 h-12 bg-sage-50 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-sage-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+            <p class="text-sage-400 text-sm font-medium mb-1">More Projects Coming Soon</p>
+            <p class="text-gray-400 text-xs leading-relaxed max-w-xs">
+              Future academic projects, research papers, and case studies will be added here as they are completed.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== SKILLS & COMPETENCIES SECTION ========== -->
+    <section id="skills" class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="mb-16 fade-in">
+          <p class="text-sage-500 text-xs tracking-widest uppercase font-medium mb-3">05 / Skills</p>
+          <h2 class="font-display section-heading text-4xl text-sage-800">Skills & Competencies</h2>
+          <p class="text-gray-400 text-sm mt-6 flex flex-wrap gap-4">
+            <!-- Legend -->
+            <span class="flex items-center gap-1.5"><span class="level-dot bg-gray-200"></span> Observed</span>
+            <span class="flex items-center gap-1.5"><span class="level-dot bg-sage-200"></span> Assisted</span>
+            <span class="flex items-center gap-1.5"><span class="level-dot bg-sage-400"></span> Supervised</span>
+            <span class="flex items-center gap-1.5"><span class="level-dot bg-sage-600"></span> Independent</span>
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+
+          <!-- Clinical Skills -->
+          <div class="fade-in">
+            <h3 class="font-display text-xl text-sage-700 mb-6 pb-2 border-b border-sage-100">Clinical Skills</h3>
+            <div class="space-y-4">
+
+              <!-- Skill row: Vital Signs Monitoring -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Vital Signs Monitoring</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-600"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">IV Flushing & Maintenance</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">IV Line Removal</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">IV Insertion</span>
+                <span class="skill-badge bg-sage-50 text-sage-500">
+                  <span class="level-dot bg-sage-200"></span> Assisted
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Suture Dressing & Wound Care</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Medical History Documentation</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-600"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Circumcision Assistance</span>
+                <span class="skill-badge bg-sage-50 text-sage-500">
+                  <span class="level-dot bg-sage-200"></span> Assisted
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Antenatal Assessment</span>
+                <span class="skill-badge bg-gray-50 text-gray-500">
+                  <span class="level-dot bg-gray-200"></span> Observed
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Newborn Care</span>
+                <span class="skill-badge bg-gray-50 text-gray-500">
+                  <span class="level-dot bg-gray-200"></span> Observed
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Professional & Soft Skills -->
+          <div class="fade-in" style="transition-delay:0.15s">
+            <h3 class="font-display text-xl text-sage-700 mb-6 pb-2 border-b border-sage-100">Professional Skills</h3>
+            <div class="space-y-4">
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Patient Communication</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-600"></span> Independent
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Clinical Documentation</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Health Education Delivery</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Teamwork & Collaboration</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-600"></span> Independent
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Critical Analysis</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-400"></span> Supervised
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Cultural Safety Awareness</span>
+                <span class="skill-badge bg-sage-100 text-sage-700">
+                  <span class="level-dot bg-sage-600"></span> Independent
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Paediatric Patient Care</span>
+                <span class="skill-badge bg-sage-50 text-sage-500">
+                  <span class="level-dot bg-sage-200"></span> Assisted
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">Community Health Practice</span>
+                <span class="skill-badge bg-sage-50 text-sage-500">
+                  <span class="level-dot bg-sage-200"></span> Assisted
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section id="contact" class="py-24 bg-sage-800">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+          <!-- Left: Text -->
+          <div class="fade-in">
+            <p class="text-sage-300 text-xs tracking-widest uppercase font-medium mb-3">06 / Contact</p>
+            <h2 class="font-display text-4xl md:text-5xl text-white mb-6 leading-tight">
+              Let's Connect
+            </h2>
+            <p class="text-sage-300 text-sm leading-relaxed mb-10 max-w-sm">
+              Whether you are a fellow student, a clinical supervisor, or an institution interested in
+              connecting — I would love to hear from you.
+            </p>
+
+            <!-- Contact Info -->
+            <div class="space-y-5">
+              <a href="mailto:hopepadilla95@gmail.com"
+                 class="flex items-center gap-4 group">
+                <div class="w-10 h-10 bg-sage-700 rounded-xl flex items-center justify-center group-hover:bg-sage-600 transition-colors">
+                  <svg class="w-4 h-4 text-sage-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-sage-400 mb-0.5">Email</p>
+                  <p class="text-white text-sm group-hover:text-sage-200 transition-colors">hopepadilla95@gmail.com</p>
+                </div>
+              </a>
+
+              <a href="tel:09774975440"
+                 class="flex items-center gap-4 group">
+                <div class="w-10 h-10 bg-sage-700 rounded-xl flex items-center justify-center group-hover:bg-sage-600 transition-colors">
+                  <svg class="w-4 h-4 text-sage-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-sage-400 mb-0.5">Phone</p>
+                  <p class="text-white text-sm group-hover:text-sage-200 transition-colors">0977 497 5440</p>
+                </div>
+              </a>
+
+              <a href="https://instagram.com/zshellz_" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-4 group">
+                <div class="w-10 h-10 bg-sage-700 rounded-xl flex items-center justify-center group-hover:bg-sage-600 transition-colors">
+                  <svg class="w-4 h-4 text-sage-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.5"/>
+                    <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-sage-400 mb-0.5">Instagram</p>
+                  <p class="text-white text-sm group-hover:text-sage-200 transition-colors">@zshellz_</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Simple contact card / CTA -->
+          <div class="fade-in" style="transition-delay:0.2s">
+            <div class="bg-sage-700 rounded-3xl p-8 border border-sage-600">
+              <h3 class="font-display text-2xl text-white mb-2">Send an Email</h3>
+              <p class="text-sage-400 text-sm mb-8">
+                Click below to open your email client and send a message directly.
+              </p>
+
+              <a href="mailto:hopepadilla95@gmail.com?subject=Portfolio%20Inquiry"
+                 class="block w-full text-center px-6 py-4 bg-white text-sage-800 rounded-2xl text-sm font-medium hover:bg-sage-50 transition-colors mb-4">
+                Email Khryzzel Hope
+              </a>
+
+              <p class="text-center text-sage-500 text-xs">
+                Based in Tacurong City, Sultan Kudarat, Philippines
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-sage-900 py-8">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="font-display text-sage-400 text-sm">Khryzzel Hope Ponce Padilla</p>
+        <p class="text-sage-600 text-xs">
+          BS Midwifery · Sultan Kudarat State University · Expected 2028
+        </p>
+        <p class="text-sage-600 text-xs">
+          Built with HTML, Tailwind CSS & JavaScript
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+      // ── Mobile Menu Toggle ──────────────────────────────────────────
+      const menuBtn    = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const bar1       = document.getElementById("bar1");
+      const bar2       = document.getElementById("bar2");
+      const bar3       = document.getElementById("bar3");
+
+      menuBtn.addEventListener("click", () => {
+        // Toggle open class on the dropdown
+        mobileMenu.classList.toggle("open");
+
+        // Animate hamburger into an X
+        bar1.classList.toggle("rotate-45");
+        bar1.classList.toggle("translate-y-2");
+        bar2.classList.toggle("opacity-0");
+        bar3.classList.toggle("-rotate-45");
+        bar3.classList.toggle("-translate-y-2");
+      });
+
+      // Close mobile menu when a nav link is clicked
+      document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          bar1.classList.remove("rotate-45", "translate-y-2");
+          bar2.classList.remove("opacity-0");
+          bar3.classList.remove("-rotate-45", "-translate-y-2");
+        });
+      });
+
+
+      // ── Scroll Fade-In Animation ────────────────────────────────────
+      // IntersectionObserver watches elements with .fade-in class
+      // and adds .visible when they enter the viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              // Unobserve after animation so it only fires once
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 } // triggers when 12% of the element is visible
+      );
+
+      // Attach observer to all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+
+      // ── Navbar scroll shadow ────────────────────────────────────────
+      // Adds a subtle shadow to the navbar once the user scrolls down
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add("shadow-sm");
+        } else {
+          navbar.classList.remove("shadow-sm");
+        }
+      });
+    </script>
+
+  </body>
+</html>
